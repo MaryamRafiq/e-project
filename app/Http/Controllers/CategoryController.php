@@ -10,11 +10,26 @@ class CategoryController extends Controller
     /**
      * Display a listing of the categories.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all(); // Retrieve all categories
+        $query = Category::query();
+
+        if ($request->has('name') && $request->input('name') !== '') {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+    
+        $categories = $query->paginate(10); 
+
+        // $categories = Category::all(); 
+        // Retrieve all categories
         return view('categories.index', compact('categories')); // Return a view with the categories
     }
+
+    public function create()
+    {
+        return view('categories.create');  
+    }
+
 
     /**
      * Store a newly created category in storage.
