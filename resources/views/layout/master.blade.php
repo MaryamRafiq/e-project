@@ -21,12 +21,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
 
     {{-- tailwind css --}}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -56,6 +60,9 @@
     <script src={{ asset("lib/tempusdominus/js/moment.min.js") }}></script>
     <script src={{ asset("lib/tempusdominus/js/moment-timezone.min.js") }}></script>
     <script src={{ asset("lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js") }}></script>
+
+
+
 
     <!-- Template Javascript -->
     <script src={{ asset("js/main.js") }}></script>

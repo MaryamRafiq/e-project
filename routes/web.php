@@ -7,6 +7,11 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TestingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard/data', [DashboardController::class, 'getChartData'])->name('dashboard.data');
+
 
 
 
@@ -40,3 +45,4 @@ Route::resource('/testings', TestingController::class);
 Route::get('/testings/{testing}/delete', [TestingController::class, 'destroy']);
 Route::resource('/reports', ReportController::class);
 Route::get('/reports/{report}/delete', [ReportController::class, 'destroy']);
+

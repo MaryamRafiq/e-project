@@ -1,5 +1,5 @@
 <!-- Navbar Start -->
-<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-5 py-0 ">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <h2 class="text-primary mb-0"><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style="width:80px; height:20px;"
                 alt=""></h2>

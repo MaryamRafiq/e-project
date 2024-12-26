@@ -30,7 +30,7 @@
              </div>
          </div>
          <div class="navbar-nav w-100">
-             <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"
+             <a href="/dashboard" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"
                      style="background-color: transparent"></i>Dashboard</a>
              <div class="navbar-nav w-100">
                  <a href="/users" class="nav-item nav-link "><i class="fa-solid fa-user"

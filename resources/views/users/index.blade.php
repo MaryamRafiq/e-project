@@ -40,7 +40,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-4">Id</th>
-                                <th scope="col" class="px-4 py-4">Tester Name</th>
+                                <th scope="col" class="px-4 py-4"> Name</th>
                                 <th scope="col" class="px-4 py-3">Email</th>
                                 <th scope="col" class="px-4 py-3" style="text-align: center">Actions</th>
                             </tr>
