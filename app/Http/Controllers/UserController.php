@@ -10,13 +10,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Retrieve all users from the database
-        $users = User::all();
 
-        // Return the users to a view
-        return view('users.index', compact('users'));  // Return users to the 'users.index' view
+        $query = User::query();
+
+        if ($request->has('name') && $request->input('name') !== '') {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        $users = $query->paginate(10);
+
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -24,8 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        // Return the view to create a new user
-        return view('users.create');  // This view should contain a form for creating users
+        return view('users.create');  
     }
 
     /**
@@ -33,21 +37,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Create a new user with the validated data
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']), // Hash the password before storing
         ]);
 
-        // Redirect to the user list with a success message
         return redirect()->route('users.index')->with('success', 'User Created Successfully');
     }
 
@@ -74,21 +75,18 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Validate the incoming request data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed', // Password is optional for updates
         ]);
 
-        // Update the user's information
         $user->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'] ? bcrypt($validated['password']) : $user->password,  // Only update password if provided
         ]);
 
-        // Redirect to the user list with a success message
         return redirect()->route('users.index')->with('success', 'User Updated Successfully');
     }
 
@@ -97,10 +95,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        // Delete the user
         $user->delete();
 
-        // Redirect to the user list with a success message
         return redirect()->route('users.index')->with('success', 'User Deleted Successfully');
     }
 }
