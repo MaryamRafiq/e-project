@@ -10,22 +10,25 @@ class TestingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Retrieve all Testing records from the database
-        $testings = Testing::all();
+    $query = Testing::query();
 
-        // Return the view with the list of testings
-        return view('testings.index', compact('testings'));  // Adjust based on your Blade view path
+    if ($request->has('name') && $request->input('name') !== '') {
+        $query->where('name', 'like', '%' . $request->input('name') . '%');
     }
 
+    $testings = $query->paginate(10); 
+
+    return view('testings.index', compact('testings'));
+    
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        // Return the view to create a new Testing resource
-        return view('testings.create');  // Adjust based on your Blade view path
+        return view('testings.create');  
     }
 
     /**
@@ -33,24 +36,22 @@ class TestingController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request
-        $validated = $request->validate([
+       
+        $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'role' => 'required|string',
-            'status' => 'required|string',
+            'description' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
         ]);
-
-        // Create a new Testing record using the validated data
+    
         Testing::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'role' => $validated['role'],
-            'status' => $validated['status'],
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'role' => $request->input('role'),
+            'status' => $request->input('status'),
         ]);
-
-        // Redirect back to the index page with a success message
-        return redirect()->route('testings.index')->with('success', 'Testing Created Successfully');
+    
+        return redirect('/testings')->with('success', 'Tester created successfully');
     }
 
     /**
@@ -58,7 +59,6 @@ class TestingController extends Controller
      */
     public function show(Testing $testing)
     {
-        // Return the view to show the details of a specific Testing
         return view('testings.show', compact('testing'));  // Adjust based on your Blade view path
     }
 
@@ -67,7 +67,6 @@ class TestingController extends Controller
      */
     public function edit(Testing $testing)
     {
-        // Return the view to edit an existing Testing resource
         return view('testings.edit', compact('testing'));  // Adjust based on your Blade view path
     }
 
@@ -76,35 +75,31 @@ class TestingController extends Controller
      */
     public function update(Request $request, Testing $testing)
     {
-        // Validate the incoming request
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'role' => 'required|string',
-            'status' => 'required|string',
-        ]);
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
+        'role' => 'required|string|max:255',
+        'status' => 'required|string|max:255',
+    ]);
 
-        // Update the existing Testing record with validated data
-        $testing->update([
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'role' => $validated['role'],
-            'status' => $validated['status'],
-        ]);
+    $testing->update([
+        'name' => $validated['name'],
+        'description' => $validated['description'],
+        'role' => $validated['role'],
+        'status' => $validated['status'],
+    ]);
 
-        // Redirect back to the index page with a success message
-        return redirect()->route('testings.index')->with('success', 'Testing Updated Successfully');
-    }
+    return redirect()->route('testings.index')->with('success', 'Testing Updated Successfully');
+}
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Testing $testing)
     {
-        // Delete the specified Testing resource
         $testing->delete();
 
-        // Redirect back to the index page with a success message
         return redirect()->route('testings.index')->with('success', 'Testing Deleted Successfully');
     }
 }
