@@ -12,14 +12,24 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Retrieve all reports from the database
-        $reports = Report::with('testing')->with('user')->get();
+       
+        // Start a query for the Report model
+    $query = Report::with('testing', 'user');
 
-        // Return the view with the list of reports
-        return view('reports.index', compact('reports'));  // Adjust based on your Blade view path
+    // Check if the 'title' field is present in the request and is not empty
+    if ($request->has('title') && $request->input('title') !== '') {
+        $query->where('title', 'like', '%' . $request->input('title') . '%');
     }
+    // Paginate the results
+    $reports = $query->paginate(5);
+
+    // Return the view with the reports data
+    return view('reports.index', compact('reports'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,11 +51,11 @@ class ReportController extends Controller
     {
         // Validate the incoming request data
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'status' => 'required|string|in:active,inactive',  // Example of status values
-            'user_id' => 'required|exists:users,id',  // Validate that the user exists
-            'testing_id' => 'required|exists:testings,id',  // Validate that the testing exists
+            'title' => 'required',
+            'content' => 'required',
+            'status' => 'required',  // Example of status values
+            'user_id' => 'required',  // Validate that the user exists
+            'testing_id' => 'required',  // Validate that the testing exists
         ]);
 
         // Create a new Report record using the validated data
@@ -92,9 +102,9 @@ class ReportController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'status' => 'required|string|in:active,inactive',
-            'user_id' => 'required|exists:users,id',
-            'testing_id' => 'required|exists:testings,id',
+            'status' => 'required|string',
+            'user_id' => 'required',
+            'testing_id' => 'required',
         ]);
 
         // Update the existing Report record

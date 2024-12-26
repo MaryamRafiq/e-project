@@ -21,4 +21,17 @@ class Report extends Model
     {
         return $this->belongsTo(Testing::class);
     }
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'content',
+        'status',
+        'user_id',
+        'testing_id',
+    ];
 }
+
