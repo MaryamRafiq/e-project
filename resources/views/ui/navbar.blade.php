@@ -4,7 +4,7 @@
         <h2 class="text-primary mb-0"><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style="width:80px; height:20px;"
                 alt=""></h2>
     </a>
-    <a href="#" class="sidebar-toggler flex-shrink-0">
+    <a href="#" class="sidebar-toggler flex-shrink-0 text-primary m-3">
         <i class="fa fa-bars"></i>
     </a>
     <div class="navbar-nav align-items-center ms-auto">

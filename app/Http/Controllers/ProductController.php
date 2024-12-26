@@ -40,15 +40,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',  
+            // 'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',  
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:1',
             'status' => 'required|string|in:available,unavailable',
-            'category_id' => 'required|exists:categories,id',  
+            'category_id' => 'required|exists:categories,id',
         ]);
+
+        // return $request->all();
 
        
         if ($request->hasFile('image')) {
@@ -100,7 +103,7 @@ class ProductController extends Controller
     
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Image is now optional for update
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',  
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:1',
@@ -110,13 +113,14 @@ class ProductController extends Controller
 
        
         if ($request->hasFile('image')) {
-            
-            $imagePath = $request->file('image')->store('uploads', 'public');
+            if ($product->image) {
+                Storage::delete('public/' . $product->image); 
+            }
+            $imagePath = $request->file('image')->store('uploads', 'public'); 
         } else {
-           
-            $imagePath = $product->image;
+            $imagePath = $product->image; 
         }
-
+    
         
         $product->update([
             'name' => $validated['name'],

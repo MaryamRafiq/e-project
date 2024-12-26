@@ -9,7 +9,7 @@
 
 <div class="flex justify-center items-center max-h-screen" style="margin-top:70px">
     <div class="relative p-4 w-full max-w-2xl max-h-full bg-white rounded-lg shadow-lg">
-        <form action="/products/{{$product->id}}" method="POST">
+        <form action="/products/{{$product->id}}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
