@@ -35,12 +35,15 @@
     {{-- tailwind css --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css" rel="stylesheet">
+
+
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @stack('css')
 </head>
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
+    <div class="position-relative bg-white d-flex p-0">
         @include('ui.sidebar')
 
         <div class="content">
@@ -62,9 +65,8 @@
     <script src={{ asset("lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js") }}></script>
 
 
-
-
-    <!-- Template Javascript -->
+    <script src={{ asset("https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js" )}}></script>
+ <!-- Template Javascript -->
     <script src={{ asset("js/main.js") }}></script>
     @stack('js')
 </body>

@@ -3,26 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;  // Import the User model
+use App\Models\User;  
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Fetch the data you need for the dashboard
-        $userCount = User::count();  // Example: Number of users
-        // You can fetch other data like products, categories, etc.
-        $productCount = \App\Models\Product::count();  // Example for products
-        $categoryCount = \App\Models\Category::count();  // Example for categories
-        $testerCount = \App\Models\Testing::count();  // Example for testers
+        $userCount = User::count();  
+        $productCount = \App\Models\Product::count();  
+        $categoryCount = \App\Models\Category::count();  
+        $testerCount = \App\Models\Testing::count();  
+        $reportCount = \App\Models\Report::count();  
 
-        return view('dashboard.index', compact('userCount', 'productCount', 'categoryCount', 'testerCount'));
+        return view('dashboard.index', compact('userCount', 'productCount', 'categoryCount', 'testerCount','reportCount'));
     
     
     }
     public function getChartData()
     {
-        // Sample data for Income and Sales (replace with your dynamic data from the database)
         $incomeData = [
             'labels' => ['January', 'February', 'March', 'April', 'May'],
             'datasets' => [

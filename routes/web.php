@@ -36,13 +36,13 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout')->middlew
 
 
 Route::resource('/users', UserController::class);
-Route::get('/users/{user}/delete', [UserController::class, 'destroy']);
+Route::get('/users/{user}/delete', [UserController::class, 'destroy'])->middleware('auth');
 Route::resource('/categories', CategoryController::class);
-Route::get('/categories/{category}/delete', [CategoryController::class, 'destroy']);
+Route::get('/categories/{category}/delete', [CategoryController::class, 'destroy'])->middleware('auth');
 Route::resource('/products', ProductController::class);
-Route::get('/products/{product}/delete', [ProductController::class, 'destroy']);
+Route::get('/products/{product}/delete', [ProductController::class, 'destroy'])->middleware('auth');
 Route::resource('/testings', TestingController::class);
-Route::get('/testings/{testing}/delete', [TestingController::class, 'destroy']);
+Route::get('/testings/{testing}/delete', [TestingController::class, 'destroy'])->middleware('auth');
 Route::resource('/reports', ReportController::class);
-Route::get('/reports/{report}/delete', [ReportController::class, 'destroy']);
+Route::get('/reports/{report}/delete', [ReportController::class, 'destroy'])->middleware('auth');
 

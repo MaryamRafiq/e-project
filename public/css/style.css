@@ -100,7 +100,7 @@
 }
 
 .content {
-    margin-left: 250px;
+    margin-left: 230px;
     min-height: 100vh;
     background: linear-gradient(to right,#009CFF,#FFFFFF);
     transition: 0.5s;
