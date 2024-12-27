@@ -12,7 +12,7 @@
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <div class="w-full md:w-1/2">
-                        <form action="{{ route('products.index') }}" method="GET" class="flex items-center space-x-4">
+                        <form action="{{ route('products.index') }}" method="GET" class="flex items-center space-x-4 ">
                             <input type="text" name="name" value="{{ request('name') }}" placeholder="Search by Name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <button type="submit"
@@ -55,11 +55,11 @@
                             @forelse ($products as $product)
                                 <tr class="border-b dark:border-gray-700">
                                     <td class="px-4 py-3">{{ $product->id }}</td>
-                                    <td class="px-4 py-3">{{ $product->image }}</td>
+                                    <td class="px-4 py-3"><img src="storage/{{ $product->image }}" /></td>
                                     <td class="px-4 py-3">{{ $product->name }}</td>
                                     <td class="px-4 py-3 max-w-[12rem] truncate">{{ $product->description }}</td>
                                     <td class="px-4 py-3">{{ $product->quantity }}</td>
-                                    <td class="px-4 py-3">{{ $product->category }}</td>
+                                    <td class="px-4 py-3">{{ $product->category->name }}</td>
                                     <td class="px-4 py-3">{{ $product->status }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
                                         {{-- Edit button --}}

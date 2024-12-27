@@ -9,7 +9,7 @@
 
     <div class="flex justify-center items-center max-h-screen" style="margin-top:70px">
         <div class="relative p-4 w-full max-w-2xl max-h-full bg-white rounded-lg shadow-lg">
-            <form action="/products" method="POST">
+            <form action="/products" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
@@ -38,7 +38,7 @@
                         <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Price</label>
                         <input type="number" name="price" id="price"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Tester role" required>
+                            placeholder="Product Price" required>
                         @error('price')
                             <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
                         @enderror
@@ -48,7 +48,7 @@
                         <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
                         <input type="number" name="quantity" id="quantity"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Tester role" required>
+                            placeholder="Product Quantity" required>
                         @error('quantity')
                             <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
                         @enderror
@@ -57,9 +57,15 @@
                     <div>
                         <label for="status"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                        <input type="text" name="status" id="status"
+                        {{-- <input type="text" name="status" id="status"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Status" required> --}}
+                            <select name="status" id="status"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Status" required>
+                                <option value="available">Available</option>
+                                <option value="unavailable">Unavailable</option>
+                            </select>
                         @error('status')
                             <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
                         @enderror
@@ -68,20 +74,23 @@
                     <div>
                         <label for="category"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                        <select type="text" name="category" id="category"
+                        <select type="text" name="category_id" id="category"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="category" required>
                             <option selected disabled>Select category</option>
-                            <option >Energy storage capacitor</option>
-                            <option >Passive Components</option>
-                            <option >Active Components</option>
-                            <option >Single processing components</option>
-                            <option >Power management components</option>
-                            <option >Communication components</option>
-                            <option >Measurement components</option>
-                            <option >Mechanical Components</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id}}">{{$category->name}}</option>
+                            @endforeach
                         </select>    
-                        @error('category')
+
+
+                        {{-- <select name="category_id" id="category_id" required>
+                            <option selected disabled>Select category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select> --}}
+                        @error('category_id')
                             <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
                         @enderror
                     </div>
